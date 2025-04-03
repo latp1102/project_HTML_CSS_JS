@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+}
+
+.menu {
+  background-color: rgb(240, 240, 240);
+  height: 100vh;
+  width: 200px;
+  border-right: 1px solid rgb(204, 204, 204);
+  display: flex;
+  flex-direction: column;
+}
+p {
+  color: #84919A;
+}
+.menu a {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #252C32;
+  border-bottom: 1px solid #E5E9EB;
+}
+
+.content {
+  flex: 1;
+  margin-left: 24px;
+}
+
+.header {
+  background-color: #FFFFFF;
+  height: 65px;
+  width: 100%;
+  border-bottom: 1px solid #E5E9EB;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header-icons {
+  margin-left: 15px;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.main {
+  height: calc(100vh - 56px);
+  padding: 24px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.category-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.button {
+  height: 36px;
+  padding: 0 16px;
+  background-color: #4094F7;
+  border: 1px solid ;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.button:hover {
+  background-color: #4094F7;
+}
+
+.button:focus {
+  background-color: #4094F7;
+}
+
+.category-function {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.select,
+.input-search {
+  height: 36px;
+  width: 200px;
+  padding: 0 16px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #E5E9EB;
+}
+
+.input-search {
+  padding-right: 30px;
+}
+
+.input-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.image_00 {
+  position: absolute;
+  right: 10px;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category-table thead tr {
+  height: 40px;
+  background-color: #EAECF0;
+  border: 1px solid #E5E9EB;
+}
+
+.category-table tbody tr td {
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid #E5E9EB;
+}
+
+.all {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.all .delete-button,
+.all .edit-button {
+  width: 20px;
+  height: 20px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  width: fit-content;
+  font-weight: 500;
+}
+
+.status-active {
+  background-color: #ECFDF3;
+  color: #12B76A;
+}
+
+.status-inactive {
+  background-color: #FEF2F2;
+  color: #EF4444;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.pagination button {
+  width: 32px;
+  height: 32px;
+}
+
+.button-prev,
+.button-next,
+.button-number {
+  border: 1px solid #E5E9EB;
+  padding: 8px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button-number.active {
+  background-color: #4094F7;
+  color: #FFFFFF;
+}
+
+.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-category {
+  background-color: #FFFFFF;
+  width: 500px;
+  padding: 20px 24px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-body {
+  margin-bottom: 10px;
+}
+
+#subjectName {
+  margin-bottom: 24px;
+}
+.form-body label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-body input[type="text"] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #E5E9EB;
+  border-radius: 4px;
+}
+
+.status-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.form-footer button {
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#btnCloseFormCategory {
+  background-color: gray;
+  color: #FFFFFF;
+  border-radius: 8px;
+}
+
+#btnAddSubject {
+  background: blue;
+  color: #FFFFFF;
+  border-radius: 10px;
+}

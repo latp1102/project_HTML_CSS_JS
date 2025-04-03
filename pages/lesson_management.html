@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/lesson_management.css">
+</head>
+<body>
+    <div class="container">
+        <menu class="menu">
+            <div class="menu-Input">
+                <h4>
+                    <img class="images-Input" src="../assets/public/images/image_01.png" alt="">
+                    Study Tracket
+                </h4>
+            </div>
+            <div class="menu-Inputs">
+                <p>Quản lý tiến độ học tập</p>
+                <a href=""> <img src="../assets/public/icons/icon_07.png" alt="">Thống kê</a>
+                <a href=""><img src="../assets/public/icons/icon_21.png" alt="">Quản lý môn học</a>
+                <a href=""><img src="../assets/public/icons/icon_09.png" alt="">Quản lý bài học</a>
+            </div>
+        </menu>
+        <div class="content">
+            <header class="header">
+                <div class="header-iconss">
+                    <img class="image_10" src="../assets/public/icons/icon_10.png" alt="">
+                </div>
+                <div class="header-icons">
+                    <img src="../assets/public/icons/icon_11.png" alt="">
+                    <img src="../assets/public/icons/icon_12.png" alt="">
+                    <img src="../assets/public/icons/icon_13.png" alt="">
+                    <img src="../assets/public/images/image_02.png" alt="">
+                </div>
+            </header>
+            <main class="main">
+                <div class="category-manager">
+                    <div class="category-header">
+                        <h3 class="category-title">Bài học</h3>
+                        <div class="all">
+                            <select class="select">
+                                <option value="">Lọc theo môn học</option>
+                                <option value="">Đã hoàn thành</option>
+                                <option value="">Chưa hoàn thành</option>
+                            </select>
+                            <button id="buttonAddCategory" class="button">
+                                Thêm mới môn học
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table border="1" class="category-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>Tên môn học <img src="../assets/public/icons/icon_16.png" alt=""></th>
+                            <th>Thời gian học <img src="../assets/public/icons/icon_16.png" alt=""></th>
+                            <th>Trạng thái</th>
+                            <th colspan="2">Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input checked type="checkbox" name="" id=""></td>
+                            <td>Session 01-Tổng quan về HTML</td>
+                            <td>45</td>
+                            <td>
+                                <div class="status status-active">
+                                    <img src="../assets/public/icons/icon_19.png" alt="">
+                                    <span>Đã hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="" id=""></td>
+                            <td>Session 02-Thẻ inline và Block</td>
+                            <td>60</td>
+                            <td>
+                                <div class="status status-inactive">
+                                    <img src="../assets/public/icons/icon_20.png" alt="">
+                                    <span>Chưa hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input checked type="checkbox" name="" id=""></td>
+                            <td>Session 03-Form và Table</td>
+                            <td>40</td>
+                            <td>
+                                <div class="status status-active">
+                                    <img src="../assets/public/icons/icon_19.png" alt="">
+                                    <span>Đã hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input checked type="checkbox"></td>
+                            <td>Session 04-CSS cơ bản</td>
+                            <td>45</td>
+                            <td>
+                                <div class="status status-inactive">
+                                    <img src="../assets/public/icons/icon_20.png" alt="">
+                                    <span>Chưa hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Session 05-CSS layout</td>
+                            <td>60</td>
+                            <td>
+                                <div class="status status-inactive">
+                                    <img src="../assets/public/icons/icon_20.png" alt="">
+                                    <span>Chưa hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Session 06-CSS Flex box</td>
+                            <td>45</td>
+                            <td>
+                                <div class="status status-inactive">
+                                    <img src="../assets/public/icons/icon_20.png" alt="">
+                                    <span>Chưa hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input checked type="checkbox"></td>
+                            <td>Session 12-Con trot trong C</td>
+                            <td>45</td>
+                            <td>
+                                <div class="status status-active">
+                                    <img src="../assets/public/icons/icon_19.png" alt="">
+                                    <span>Đã hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Session 15-Đọc và ghi file</td>
+                            <td>60</td>
+                            <td>
+                                <div class="status status-inactive">
+                                    <img src="../assets/public/icons/icon_20.png" alt="">
+                                    <span>Chưa hoàn thành</span>
+                                </div>
+                            </td>
+                            <td>
+                                <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
+                                <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="button-prev">
+                        <img src="../assets/public/icons/icon_17.png" alt="">
+                    </button>
+                    <button class="button-number active">1</button>
+                    <button class="button-number">2</button>
+                    <button class="button-number">3</button>
+                    <button class="button-number">4</button>
+                    <button class="button-number">5</button>
+                    <button class="button-number">6</button>
+                    <button class="button-number">7</button>
+                    <button class="button-number">...</button>
+                    <button class="button-number">20</button>
+                    <button class="button-next">
+                        <img src="../assets/public/icons/icon_18.png" alt="">
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div class="overlay" id="formCategory" style="display: none">
+        <form class="form-category">
+            <div class="form-header">
+                <h3>Thêm mới bài học</h3>
+            </div>
+            <div class="form-body">
+                <label for="">Tên bài học</label>
+                <input type="text" id="subjectName" name="subjectName" placeholder="Session 10 -Cấu trúc điều kiện" />
+                <div id="subjectNameError" class="error-message"></div>
+
+                <label for="">Loại môn học</label>
+                <select class="subjects">
+                    <option type="a" value="">Lập trình C cơ bản</option>
+                    <option type="a" value="">HTML VÀ CSS</option>
+                </select>
+
+                <label for="">Thời gian học</label>
+                <input type="number" id="time" name="time" placeholder="45">
+                <div id="timeError" class="error-message"></div>
+
+                <label>Trạng thái:</label>
+                <div class="status-group">
+                    <input type="radio" id="active" name="status" value="active" checked/>
+                    <label for="active">Đã hoàn thành</label>
+                    <input type="radio" id="inactive" name="status" value="inactive" />
+                    <label for="inactive">Chưa hoàn thành</label>
+                </div>
+                <hr>
+            </div>
+            <div class="form-footer">
+                <button type="button" id="btnCloseFormCategory">Hủy</button>
+                <button type="button" id="btnAddSubject">Thêm</button>
+            </div>
+        </form>
+    </div>
+    <script src="../js/lesson_management.js"></script>
+</body>
+</html>

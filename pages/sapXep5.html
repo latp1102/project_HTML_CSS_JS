@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sắp xếp môn học</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .menu images-Input {
+        width: 10px;
+        height: 10px;
+      }
+
+      .menu {
+        background-color: gainsboro;
+        height: 100vh;
+        width: 200px;
+        border: 2px solid gray;
+      }
+
+      .menu-Inputs {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+      }
+      .content {
+        flex: 1;
+        margin-left: 24px;
+      }
+
+      .header {
+        background-color: gainsboro;
+        height: 56px;
+        border: 2px solid gray;
+        margin-left: 24px;
+        margin-bottom: 25px;
+      }
+
+      .main {
+        height: calc(100vh - 56px);
+        padding: 24px;
+      }
+
+      .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .category-title {
+        display: flex;
+        flex: 1;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .button {
+        height: 36px;
+        padding: 0 16px;
+        border: 1px solid transparent;
+        outline: none;
+        background-color: #4094f7;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s linear;
+        display: flex;
+        flex: 0.5;
+      }
+      .button:hover {
+        background-color: #3386e5;
+      }
+      .button:focus {
+        background-color: #1c69c1;
+      }
+
+      .select {
+        height: 36px;
+        width: 200px;
+        padding: 0 16px;
+        border: 1px solid transparent;
+        outline: none;
+        border-radius: 4px;
+        border: 1px solid #dadada;
+        display: flex;
+        flex: 0.5;
+      }
+      #buttonAddCategory {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .all {
+        display: flex;
+        gap: 12px;
+      }
+
+      .category-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .category-table thead tr {
+        height: 40px;
+        padding: 0 16px;
+        background-color: #f9fafb;
+        border: 1px solid #dadada;
+      }
+      .category-table tbody tr td {
+        height: 40px;
+        padding: 0 16px;
+        border: 1px solid #dadada;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        border-radius: 12px;
+        width: fit-content;
+        font-weight: 500;
+      }
+      .status-active {
+        background-color: #ecfdf3;
+        color: #228b5f;
+      }
+      .status-inactive {
+        background-color: #ecfdf3;
+        color: #c84c4c;
+      }
+
+      .active {
+        background-color: green;
+      }
+      .inactive {
+        background-color: gray;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 70px;
+      }
+      .button-prev,
+      .button-next {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        margin: 0 4px;
+        cursor: pointer;
+        border-radius: 4px;
+        width: 32px;
+        height: 32px;
+      }
+      .button-prev,
+      .button-next {
+        display: flex;
+        justify-content: center;
+      }
+      .button-number {
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        margin: 0 4px;
+        cursor: pointer;
+        border-radius: 4px;
+        width: 32px;
+        height: 32px;
+      }
+      .button-number.active {
+        background-color: #4094f7;
+        color: #fff;
+      }
+
+      .overlay {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.5);
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-category {
+        background-color: #fff;
+        width: 500px;
+        padding: 20px 24px;
+        border-radius: 8px;
+      }
+      .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .container {
+        display: flex;
+      }
+      .menu {
+        background-color: #f0f0f0;
+        height: 100vh;
+        width: 200px;
+        border-right: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+      }
+      .menu a {
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #ccc;
+      }
+      .content {
+        flex: 1;
+      }
+      .header-iconss .image_10 {
+        display: flex;
+        flex: 1;
+      }
+      .header {
+        background-color: #f9f9f9;
+        height: 56px;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 20px;
+      }
+      .header-icons {
+        margin-left: 15px;
+        font-size: 18px;
+        color: #555;
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      .main {
+        height: calc(100vh - 56px);
+        padding: 24px;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+      }
+
+      .status-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button {
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+      }
+
+      #btnCloseFormCategory {
+        background: gray;
+        color: white;
+      }
+
+      #btnAddSubject {
+        background: blue;
+        color: white;
+      }
+      .form-category {
+        background-color: #fff;
+        width: 500px;
+        padding: 20px 24px;
+        border-radius: 8px;
+        position: relative;
+      }
+
+      .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .form-body {
+        margin-bottom: 10px;
+      }
+
+      .form-body label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-body input[type="text"] {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .form-body option[type="a"] {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .form-body input[type="number"] {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .category-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .category-table td,
+      .category-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .status-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 5px;
+      }
+
+      .form-footer {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .form-footer button {
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      #btnCloseFormCategory {
+        background: gray;
+        color: white;
+      }
+
+      #btnAddSubject {
+        background: blue;
+        color: white;
+      }
+      .error-message {
+        color: red;
+        font-size: 0.8em;
+        margin-top: 5px;
+      }
+      #sort-select,
+      #sort-button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <menu class="menu"> </menu>
+      <div class="content">
+        <header class="header"></header>
+        <main class="main">
+          <div class="category-manager">
+            <div class="category-header">
+              <h3 class="category-title">Danh sách môn học</h3>
+              <div class="all">
+                <select id="sort-select" class="select">
+                  <option value="name">Tên môn học</option>
+                  <option value="time">Thời gian học</option>
+                  <option value="status">Trạng thái</option>
+                </select>
+                <button id="sort-button" class="button">Sắp xếp</button>
+                <button id="buttonAddCategory" class="button">
+                  Thêm mới môn học
+                </button>
+              </div>
+            </div>
+          </div>
+          <table border="1" class="category-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" /></th>
+                <th>
+                  Tên môn học
+                  <img src="../assets/public/icons/icon_16.png" alt="" />
+                </th>
+                <th>
+                  Thời gian học
+                  <img src="../assets/public/icons/icon_16.png" alt="" />
+                </th>
+                <th>Trạng thái</th>
+                <th colspan="2">Chức năng</th>
+              </tr>
+            </thead>
+            <tbody id="subject-list"></tbody>
+          </table>
+          <div class="pagination"></div>
+        </main>
+      </div>
+    </div>
+    <div class="overlay" id="formCategory" style="display: none"></div>
+    <script src="">
+      // Lấy các phần tử HTML cần thiết
+      const formCategory = document.getElementById("formCategory");
+      const buttonAddCategory = document.getElementById("buttonAddCategory");
+      const btnCloseFormCategory = document.getElementById(
+        "btnCloseFormCategory"
+      );
+      const btnAddSubject = document.getElementById("btnAddSubject");
+      const subjectNameInput = document.getElementById("subjectName");
+      const timeInput = document.getElementById("time");
+      const subjectTableBody = document.querySelector(".category-table tbody");
+      const sortSelect = document.getElementById("sort-select");
+      const sortButton = document.getElementById("sort-button");
+
+      // Mảng chứa danh sách môn học
+      let subjects = [];
+
+      // Hàm mở form thêm môn học
+      buttonAddCategory.addEventListener("click", () => {
+        formCategory.style.display = "block";
+      });
+
+      // Hàm đóng form thêm môn học
+      btnCloseFormCategory.addEventListener("click", () => {
+        formCategory.style.display = "none";
+      });
+
+      // Hàm đóng form
+      function closeForm() {
+        formCategory.style.display = "none";
+      }
+
+      // Hàm thêm môn học vào danh sách
+      btnAddSubject.addEventListener("click", () => {
+        const subjectName = subjectNameInput.value;
+        const time = timeInput.value;
+        const status = document.querySelector(
+          'input[name="status"]:checked'
+        ).value;
+
+        // Kiểm tra dữ liệu đầu vào (bạn có thể thêm kiểm tra khác nếu cần)
+        if (!subjectName || !time) {
+          alert("Vui lòng nhập đầy đủ thông tin môn học!");
+          return;
+        }
+
+        // Tạo đối tượng môn học mới
+        const newSubject = {
+          name: subjectName,
+          time: time,
+          status: status,
+        };
+
+        // Thêm môn học vào mảng
+        subjects.push(newSubject);
+
+        // Tạo hàng mới trong bảng
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+        <td><input type="checkbox"></td>
+        <td>${subjectName}</td>
+        <td>${time}</td>
+        <td>${
+          status === "active"
+            ? `<div class="status status-active"><img src="../assets/public/icons/icon_19.png" alt=""><span>Đã hoàn thành</span></div>`
+            : `<div class="status status-inactive"><img src="../assets/public/icons/icon_20.png" alt=""><span>Chưa hoàn thành</span></div>`
+        }</td>
+        <td><img class="delete-button" src="../assets/public/icons/icon_14.png" alt=""></td>
+        <td><img class="edit-button" src="../assets/public/icons/icon_15.png" alt=""></td>
+    `;
+
+        // Thêm hàng mới vào bảng
+        subjectTableBody.appendChild(newRow);
+
+        // Đóng form
+        closeForm();
+
+        // Reset form
+        subjectNameInput.value = "";
+        timeInput.value = "";
+
+        // Gắn sự kiện cho nút xóa và sửa
+        setupEventListeners();
+      });
+
+      // Hàm gắn sự kiện cho nút xóa và sửa
+      function setupEventListeners() {
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        const editButtons = document.querySelectorAll(".edit-button");
+
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const row = button.parentElement.parentElement;
+            row.remove();
+          });
+        });
+
+        editButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Xử lý sự kiện sửa môn học (bạn có thể thêm logic sửa môn học tại đây)
+            alert("Chức năng sửa môn học đang được phát triển!");
+          });
+        });
+      }
+
+      // Gọi hàm setupEventListeners() khi trang tải xong
+      setupEventListeners();
+
+      // Hàm sắp xếp danh sách môn học
+      function sortSubjects(sortBy) {
+        const subjectsToSort = Array.from(
+          subjectTableBody.querySelectorAll("tr")
+        );
+        subjectsToSort.sort((a, b) => {
+          const aValue = a.querySelector(
+            `td:nth-child(${sortBy === "name" ? 2 : sortBy === "time" ? 3 : 4})`
+          ).textContent;
+          const bValue = b.querySelector(
+            `td:nth-child(${sortBy === "name" ? 2 : sortBy === "time" ? 3 : 4})`
+          ).textContent;
+          if (sortBy === "time") {
+            return parseInt(aValue) - parseInt(bValue);
+          } else {
+            return aValue.localeCompare(bValue);
+          }
+        });
+
+        // Xóa danh sách môn học hiện tại
+        subjectTableBody.innerHTML = "";
+
+        // Thêm lại danh sách môn học đã sắp xếp
+        subjectsToSort.forEach((subject) => {
+          subjectTableBody.appendChild(subject);
+        });
+      }
+
+      // Gắn sự kiện click cho nút sắp xếp
+      sortButton.addEventListener("click", () => {
+        sortSubjects(sortSelect.value);
+      });
+    </script>
+  </body>
+</html>

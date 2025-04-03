@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Gloria+Hallelujah&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.error {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+.container {
+  padding: 24px;
+  text-align: center;
+}
+
+.contenet h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.content p {
+  color: gray;
+  margin-bottom: 20px;
+  padding: 24px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+  padding: 24px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group {
+  display: flex;
+  gap: 24px;
+}
+
+.input-group input {
+  width: 50%;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 24px;
+  border-radius: 6px;
+}
+
+.checkbox-group input {
+  width: auto;
+  margin-right: 10px;
+  border-radius: 6px;
+}
+
+.checkbox-group a {
+  color: #007AFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn {
+  width: 90%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.login-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input-group input {
+    width: 100%;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 24px;
+  }
+}
