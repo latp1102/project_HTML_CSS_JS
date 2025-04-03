@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const subjectNameError = document.getElementById("subjectNameError");
     const timeError = document.getElementById("timeError");
 
-    // Mở modal
     buttonAddCategory.addEventListener("click", () => {
         formCategory.style.display = "flex";
         subjectNameInput.value = "";
@@ -19,14 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
         formCategory.dataset.editingRow = null;
     });
 
-    // Đóng modal
     function closeForm() {
         formCategory.style.display = "none";
     }
 
     btnCloseFormCategory.addEventListener("click", closeForm);
 
-    // Thêm môn học vào danh sách
     btnAddSubject.addEventListener("click", () => {
         const subjectName = subjectNameInput.value.trim();
         const status = document.querySelector('input[name="status"]:checked').value;
@@ -100,43 +97,3 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
     }
-
-    function sortTable(columnIndex, ascending) {
-        const rows = Array.from(subjectTableBody.querySelectorAll("tr"));
-        rows.sort((rowA, rowB) => {
-            const cellA = rowA.children[columnIndex].textContent.trim();
-            const cellB = rowB.children[columnIndex].textContent.trim();
-            if (columnIndex === 2) { // Sắp xếp theo thời gian
-                const timeA = parseInt(cellA, 10);
-                const timeB = parseInt(cellB, 10);
-                return ascending ? timeA - timeB : timeB - timeA;
-            } else { // Sắp xếp theo tên
-                return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-            }
-        });
-
-        // Xóa các hàng hiện tại và thêm các hàng đã sắp xếp
-        rows.forEach(row => subjectTableBody.appendChild(row));
-    }
-
-    function setupSortEventListeners() {
-        const nameHeader = document.querySelector(".category-table th:nth-child(2)");
-        const timeHeader = document.querySelector(".category-table th:nth-child(3)");
-
-        let nameAscending = true;
-        let timeAscending = true;
-
-        nameHeader.addEventListener("click", () => {
-            sortTable(1, nameAscending);
-            nameAscending = !nameAscending;
-        });
-
-        timeHeader.addEventListener("click", () => {
-            sortTable(2, timeAscending);
-            timeAscending = !timeAscending;
-        });
-    }
-
-    setupEventListeners();
-    setupSortEventListeners();
-});
