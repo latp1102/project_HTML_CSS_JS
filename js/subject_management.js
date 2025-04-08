@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             subjects = subjects.filter(subject => subject.id !== id);
             filterSubjects();
             document.body.removeChild(modal);
-           
+            // Hiển thị thông báo thành công
             showSuccessNotification();
         };
         modal.appendChild(confirmButton);
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateSubject(parseInt(formCategory.dataset.editingId), subjectName, status);
             formCategory.dataset.editingId = null;
         } else {
-            const newId = subjects.length > 0 ? Math.max(...subjects.map(subjects => subjects.id)) + 1 : 1;
+            const newId = subjects.length > 0 ? Math.max(...subjects.map(subjects => subjects.id)) + 1 : 1;//.//
             subjects.push({ id: newId, name: subjectName, status, createdAt: new Date().toISOString() });
         }
         closeForm();
