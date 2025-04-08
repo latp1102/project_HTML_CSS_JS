@@ -372,13 +372,7 @@ hr {
 .modal {
   display: none;
   position: fixed;
-  /* top: 0;
-  left: 0; */
-  /* width: 100%; */
-  /* height: 100%; */
-  background: rgba(0, 0, 0, 0.5);
-  /* justify-content: center; */
-  /* align-items: center; */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-icon {
@@ -390,17 +384,13 @@ hr {
   padding: 20px;
   border-radius: 10px;
   width: 300px;
-  /* text-align: center; */
 }
 
 .modal-footer {
-  /* display: flex; */
-  /* justify-content: space-between; */
   margin-top: 20px;
 }
 
 .modal-footer button {
-  /* padding: 8px 15px; */
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -440,11 +430,6 @@ hr {
   align-items: center;
   gap: 12px;
 }
-
-/* .modal-content .modal-icon {
-  display: flex;
-  gap: 12px;
-} */
 
 .notification-icon img {
   width: 24px;

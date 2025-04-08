@@ -83,6 +83,7 @@ body {
   flex-direction: row;
   padding: 32px;
   gap: 32px;
+  margin-left: 160px;
 }
 
 .subject {
@@ -92,9 +93,14 @@ body {
 .courses {
   display: flex;
   flex-direction: column;
+  justify-items: center;
+  text-align: center;
   gap: 20px;
   padding: 20px;
+  margin-left: 160px;
+  margin-bottom: 132px;
 }
+
 .course {
   display: flex;
   background: #fff;

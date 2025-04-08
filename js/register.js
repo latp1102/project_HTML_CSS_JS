@@ -26,17 +26,17 @@ registerBtn.addEventListener('click', function() {
     }
 
     if (!passwordInput.value.trim()) {
-        document.getElementById('passwordError').textContent = 'Mật khẩu không được để trống.';
+        document.getElementById('passwordError').textContent = 'Mật khẩu không được để trống';
         isValid = false;
     } else if (passwordInput.value.length < 8) {
-        document.getElementById('passwordError').textContent = 'Mật khẩu phải có ít nhất 8 ký tự.';
+        document.getElementById('passwordError').textContent = 'Mật khẩu phải có ít nhất 8 ký tự';
         isValid = false;
     } else {
         document.getElementById('passwordError').textContent = '';
     }
 
     if (!agreeTermsInput.checked) {
-        document.getElementById('termsError').textContent = 'Vui lòng đồng ý với điều khoản.';
+        document.getElementById('termsError').textContent = 'Vui lòng đồng ý với điều khoản';
         isValid = false;
     } else {
         document.getElementById('termsError').textContent = '';
