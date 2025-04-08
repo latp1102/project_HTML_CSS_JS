@@ -1,7 +1,7 @@
 const searchInput = document.getElementById("search");
 const courses = document.querySelectorAll(".course");
 
-searchInput.addEventListener("input", function () {
+searchInput.addEventListener("click", function () {
   const searchTerm = searchInput.value.toLowerCase();
 
   courses.forEach((course) => {

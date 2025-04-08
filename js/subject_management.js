@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             subjects = subjects.filter(subject => subject.id !== id);
             filterSubjects();
             document.body.removeChild(modal);
-
+            
             showSuccessNotification();
         };
         modal.appendChild(confirmButton);
