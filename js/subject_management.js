@@ -291,8 +291,12 @@ document.addEventListener("DOMContentLoaded", () => {
     btnAddSubject.onclick = addSubject;
     searchInput.addEventListener("input", filterSubjects);
     selectFilter.addEventListener("change", filterSubjects);
-    buttonPrev.onclick = () => { if (currentPage > 1) currentPage--; renderTable(); updatePagination(); };
-    buttonNext.onclick = () => { if (currentPage < Math.ceil(filteredSubjects.length / rowsPerPage)) currentPage++; renderTable(); updatePagination(); };
+    buttonPrev.onclick = () => { 
+        if (currentPage > 1) currentPage--; renderTable(); updatePagination(); 
+    };
+    buttonNext.onclick = () => { 
+        if (currentPage < Math.ceil(filteredSubjects.length / rowsPerPage)) currentPage++; renderTable(); updatePagination(); 
+    };
     sortByNameAsc.addEventListener("click", () => sortSubjectsByName("asc"));
 
     renderTable();

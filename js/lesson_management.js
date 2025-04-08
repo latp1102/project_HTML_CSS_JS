@@ -62,6 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
         formCategory.dataset.editingRow = null;
     });
 
+    function closeForm() {
+        formCategory.style.display = "none";
+    }
+
     btnCloseFormCategory.addEventListener("click", closeForm);
 
     btnAddSubject.addEventListener("click", () => {
