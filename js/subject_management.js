@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
             filterSubjects();
             document.body.removeChild(modal);
 
-            // Hiển thị thông báo thành công
             showSuccessNotification();
         };
         modal.appendChild(confirmButton);
