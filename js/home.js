@@ -2,10 +2,10 @@ const searchInput = document.getElementById("search");
 const courses = document.querySelectorAll(".course");
 
 searchInput.addEventListener("input", function () {
-  const searchTerm = searchInput.value.toLowerCase();
+  const searchTerm = searchInput.trim().toLowerCase();
 
   courses.forEach((course) => {
-    const subject = course.subject.toLowerCase();
+    const subject = course.subject.trim().toLowerCase();
     if (subject.includes(searchTerm)) {
       course.style.display = "block";
     } else {
