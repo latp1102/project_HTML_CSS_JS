@@ -108,6 +108,8 @@ body {
   border: 1px solid E5E9EB;
   display: flex;
   flex: 0.5;
+  background-color: #4094F7;
+  color: #FFFFFF;
 }
 
 #buttonAddCategory {
