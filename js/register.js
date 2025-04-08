@@ -10,7 +10,6 @@ const passwordErrorSpan = document.getElementById('passwordError'); // Get the p
 registerBtn.addEventListener('click', function() {
     let isValid = true;
 
-    // Validate First and Last Name (same as before)
     if (!firstNameInput.value.trim() || !lastNameInput.value.trim()) {
         document.getElementById('nameError').textContent = 'Họ và tên không được để trống.';
         isValid = false;
@@ -18,7 +17,6 @@ registerBtn.addEventListener('click', function() {
         document.getElementById('nameError').textContent = '';
     }
 
-    // Validate Email (same as before)
     if (!emailInput.value.trim()) {
         document.getElementById('emailError').textContent = 'Email không được để trống.';
         isValid = false;
@@ -29,21 +27,19 @@ registerBtn.addEventListener('click', function() {
         document.getElementById('emailError').textContent = '';
     }
 
-    // Validate Password (modified to check for duplicates)
     if (!passwordInput.value.trim()) {
         passwordErrorSpan.textContent = 'Mật khẩu không được để trống';
         isValid = false;
     } else if (passwordInput.value.length < 8) {
         passwordErrorSpan.textContent = 'Mật khẩu phải có ít nhất 8 ký tự';
         isValid = false;
-    } else if (isPasswordDuplicate(passwordInput.value)) { // Check for duplicate
+    } else if (isPasswordDuplicate(passwordInput.value)) { 
         passwordErrorSpan.textContent = 'Mật khẩu này đã được sử dụng. Vui lòng chọn mật khẩu khác.';
         isValid = false;
     } else {
         passwordErrorSpan.textContent = '';
     }
 
-    // Validate Confirm Password (same as before)
     if (!confirmPasswordInput.value.trim()) {
         document.getElementById('confirmPasswordError').textContent = 'Vui lòng xác nhận mật khẩu';
         isValid = false;
@@ -54,7 +50,6 @@ registerBtn.addEventListener('click', function() {
         document.getElementById('confirmPasswordError').textContent = '';
     }
 
-    // Validate Terms and Conditions (same as before)
     if (!agreeTermsInput.checked) {
         document.getElementById('termsError').textContent = 'Vui lòng đồng ý với điều khoản';
         isValid = false;
@@ -62,7 +57,6 @@ registerBtn.addEventListener('click', function() {
         document.getElementById('termsError').textContent = '';
     }
 
-    // If all validations pass, proceed with registration
     if (isValid) {
         const userData = {
             firstName: firstNameInput.value.trim(),
