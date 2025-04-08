@@ -274,3 +274,84 @@ p {
   color: #FFFFFF;
   border-radius: 10px;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  padding: 20px;
+  border: 1px solid #D0D5DD;
+  z-index: 1000;
+  text-align: center;
+}
+
+.modal-confirm-button {
+  width: 60px;
+  height: 44px;
+  background-color: #DC2626;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.modal-cancel-button {
+  margin-top: 24px;
+  width: 60px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid #D0D5DD;
+  background-color: #FFFFFF;
+}
+
+.success-notification {
+  width: 450px;
+  height: 91px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333E5A;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  margin-bottom: 12px;
+  gap: 10px;
+  z-index: 1001;
+}
+
+.success-notification img {
+  width: 20px;
+  height: 20px;
+  left: 18px;
+  top: 18px;
+}
+
+.success-notification h3 {
+  width: 346px;
+  height: 18px;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+
+.success-notification p {
+  font-size: 14px;
+  color: #FFFFFF;
+  padding-top: 14px;
+  left: 48px;
+  margin-bottom: 18px;
+}
+
+.success-notification img.close-notification {
+  border: 1px solid #FFFFFF59;
+  background-color: #FFFFFF59;
+  border-radius: 100px;
+  padding: 4px;
+  display: flex;
+  margin-left: 16px;
+  gap: 16px;
+}
+

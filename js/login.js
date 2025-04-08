@@ -30,7 +30,7 @@ loginBtn.addEventListener('click', function() {
         if (userData && userData.email === emailInput.value && userData.password === passwordInput.value) {
             // Đăng nhập thành công
             alert('Đăng nhập thành công!');
-            window.location.href = 'dashboard.html'; // Thay đổi 'dashboard.html' thành trang bạn muốn chuyển hướng đến
+            window.location.href = 'home.html'; // Thay đổi 'dashboard.html' thành trang bạn muốn chuyển hướng đến
         } else {
             // Đăng nhập thất bại
             alert('Email hoặc mật khẩu không đúng.');

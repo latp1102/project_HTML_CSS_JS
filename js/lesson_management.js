@@ -8,8 +8,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeInput = document.getElementById("time");
     const subjectNameError = document.getElementById("subjectNameError");
     const timeError = document.getElementById("timeError");
+    const subjectsSelect = document.getElementById("subjects");
+    const filterSelect = document.querySelector(".select");
+    const deleteConfirmationModal = document.getElementById('deleteConfirmationModal');
+    const subjectToDeleteName = document.getElementById('subjectToDeleteName');
+    const cancelDelete = document.getElementById('cancelDelete');
+    const confirmDelete = document.getElementById('confirmDelete');
+    const deleteSuccessNotification = document.getElementById('deleteSuccessNotification');
+    const closeNotification = document.getElementById('closeNotification');
+    const sortByNameButton = document.getElementById('sortByName');
+    const sortByTimeButton = document.getElementById('sortByTime');
 
-    // Mở modal
+    let subjectsData = [
+        { id: 1, name: "Session 01-Tổng quan về HTML", time: 45, status: "active", subjectType: "HTML VÀ CSS" },
+        { id: 2, name: "Session 02-Thẻ inline và Block", time: 60, status: "inactive", subjectType: "HTML VÀ CSS" },
+        { id: 3, name: "Session 03-Form và Table", time: 40, status: "active", subjectType: "HTML VÀ CSS" },
+        { id: 4, name: "Session 04-CSS cơ bản", time: 45, status: "inactive", subjectType: "HTML VÀ CSS" },
+        { id: 5, name: "Session 05-CSS layout", time: 60, status: "inactive", subjectType: "HTML VÀ CSS" },
+        { id: 6, name: "Session 06-CSS Flex box", time: 45, status: "inactive", subjectType: "HTML VÀ CSS" },
+        { id: 7, name: "Session 12-Con trỏ trong C", time: 45, status: "active", subjectType: "Lập trình C cơ bản" },
+        { id: 8, name: "Session 15-Đọc và ghi file", time: 60, status: "inactive", subjectType: "Lập trình C cơ bản" },
+    ];
+
+    function renderSubjectsTable(data = subjectsData) {
+        subjectTableBody.innerHTML = "";
+        data.forEach(subject => {
+            const newRow = document.createElement("tr");
+            newRow.setAttribute("data-id", subject.id);
+            newRow.innerHTML = `
+                <td><input type="checkbox"></td>
+                <td>${subject.subjectType}</td>
+                <td>${subject.name}</td>
+                <td>${subject.time}</td>
+                <td>${subject.status === "active" ? `<div class="status status-active"><img src="../assets/public/icons/icon_19.png" alt=""><span>Đã hoàn thành</span></div>` : `<div class="status status-inactive"><img src="../assets/public/icons/icon_20.png" alt=""><span>Chưa hoàn thành</span></div>`}</td>
+                <td><img class="delete-button" src="../assets/public/icons/icon_14.png" alt=""></td>
+                <td><img class="edit-button" src="../assets/public/icons/icon_15.png" alt=""></td>
+            `;
+            subjectTableBody.appendChild(newRow);
+        });
+        setupEventListeners();
+    }
+
+    function closeForm() {
+        formCategory.style.display = "none";
+    }
+
     buttonAddCategory.addEventListener("click", () => {
         formCategory.style.display = "flex";
         subjectNameInput.value = "";
@@ -19,55 +62,46 @@ document.addEventListener('DOMContentLoaded', () => {
         formCategory.dataset.editingRow = null;
     });
 
-    // Đóng modal
-    function closeForm() {
-        formCategory.style.display = "none";
-    }
-
     btnCloseFormCategory.addEventListener("click", closeForm);
 
-    // Thêm môn học vào danh sách
     btnAddSubject.addEventListener("click", () => {
         const subjectName = subjectNameInput.value.trim();
         const status = document.querySelector('input[name="status"]:checked').value;
-        const time = timeInput.value;
+        const time = parseInt(timeInput.value, 10);
+        const subjectType = subjectsSelect.value;
 
         subjectNameError.textContent = "";
         timeError.textContent = "";
 
         if (!subjectName) {
-            subjectNameError.textContent = "Vui lòng nhập tên môn học";
+            subjectNameError.textContent = "Tên bài không được để trống";
             return;
         }
 
+        if (!subjectType) {
+            subjectNameError.textContent = "Loại môn học không được để trống";
+        }
+
         if (!time) {
-            timeError.textContent = "Vui lòng nhập thời gian học";
+            timeError.textContent = "Thời gian học không được để trống";
             return;
         }
 
         if (formCategory.dataset.editingRow) {
-            const row = subjectTableBody.querySelector(`tr[data-id="${formCategory.dataset.editingRow}"]`);
-            if (row) {
-                row.children[1].textContent = subjectName;
-                row.children[2].textContent = time;
-                row.children[3].innerHTML = status === "active" ? `<div class="status status-active"><img src="icon_19.png" alt=""><span>Đã hoàn thành</span></div>` : `<div class="status status-inactive"><img src="icon_20.png" alt=""><span>Chưa hoàn thành</span></div>`;
+            const editingId = parseInt(formCategory.dataset.editingRow, 10);
+            const subjectIndex = subjectsData.findIndex(subject => subject.id === editingId);
+            if (subjectIndex !== -1) {
+                subjectsData[subjectIndex].name = subjectName;
+                subjectsData[subjectIndex].time = time;
+                subjectsData[subjectIndex].status = status;
+                subjectsData[subjectIndex].subjectType = subjectType;
             }
             formCategory.dataset.editingRow = null;
         } else {
             const newId = Date.now();
-            const newRow = document.createElement("tr");
-            newRow.setAttribute("data-id", newId);
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${subjectName}</td>
-                <td>${time}</td>
-                <td>${status === "active" ? `<div class="status status-active"><img src="icon_19.png" alt=""><span>Đã hoàn thành</span></div>` : `<div class="status status-inactive"><img src="icon_20.png" alt=""><span>Chưa hoàn thành</span></div>`}</td>
-                <td><div><img class="delete-button" src="icon_14.png" alt=""></div></td>
-                <td><div><img class="edit-button" src="icon_15.png" alt=""></div></td>
-            `;
-            subjectTableBody.appendChild(newRow);
-            setupEventListeners();
+            subjectsData.push({ id: newId, name: subjectName, time: time, status: status, subjectType: subjectType });
         }
+        renderSubjectsTable();
         closeForm();
     });
 
@@ -75,9 +109,22 @@ document.addEventListener('DOMContentLoaded', () => {
         subjectTableBody.querySelectorAll(".delete-button").forEach(button => {
             button.onclick = () => {
                 const row = button.closest("tr");
-                const subjectName = row.children[1].textContent;
-                if (confirm(`Bạn có chắc chắn muốn xóa bài học không?`)) {
-                    row.remove();
+                const subjectId = parseInt(row.getAttribute("data-id"), 10);
+                const subject = subjectsData.find(subject => subject.id === subjectId);
+                if (subject) {
+                    subjectToDeleteName.textContent = subject.name;
+                    deleteConfirmationModal.style.display = 'flex';
+
+                    confirmDelete.onclick = () => {
+                        subjectsData = subjectsData.filter(sub => sub.id !== subjectId);
+                        renderSubjectsTable();
+                        deleteConfirmationModal.style.display = 'none';
+                        deleteSuccessNotification.style.display = 'flex';
+                    };
+
+                    cancelDelete.onclick = () => {
+                        deleteConfirmationModal.style.display = 'none';
+                    };
                 }
             };
         });
@@ -85,58 +132,64 @@ document.addEventListener('DOMContentLoaded', () => {
         subjectTableBody.querySelectorAll(".edit-button").forEach(button => {
             button.onclick = () => {
                 const row = button.closest("tr");
-                const subjectName = row.children[1].textContent;
-                const status = row.children[3].textContent.includes("Đã hoàn thành") ? "active" : "inactive";
-                const time = row.children[2].textContent;
+                const subjectId = parseInt(row.getAttribute("data-id"), 10);
+                const subject = subjectsData.find(subject => subject.id === subjectId);
+                if (subject) {
+                    subjectNameInput.value = subject.name;
+                    timeInput.value = subject.time;
+                    document.querySelector(`input[name="status"][value="${subject.status}"]`).checked = true;
+                    subjectsSelect.value = subject.subjectType;
+                    subjectNameError.textContent = "";
+                    timeError.textContent = "";
 
-                subjectNameInput.value = subjectName;
-                timeInput.value = time;
-                document.querySelector(`input[name="status"][value="${status}"]`).checked = true;
-                subjectNameError.textContent = "";
-                timeError.textContent = "";
-
-                formCategory.style.display = "flex";
-                formCategory.dataset.editingRow = row.getAttribute("data-id");
+                    formCategory.style.display = "flex";
+                    formCategory.dataset.editingRow = subjectId;
+                }
             };
         });
     }
 
-    function sortTable(columnIndex, ascending) {
-        const rows = Array.from(subjectTableBody.querySelectorAll("tr"));
-        rows.sort((rowA, rowB) => {
-            const cellA = rowA.children[columnIndex].textContent.trim();
-            const cellB = rowB.children[columnIndex].textContent.trim();
-            if (columnIndex === 2) { // Sắp xếp theo thời gian
-                const timeA = parseInt(cellA, 10);
-                const timeB = parseInt(cellB, 10);
-                return ascending ? timeA - timeB : timeB - timeA;
-            } else { // Sắp xếp theo tên
-                return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    function sortTable(sortBy) {
+        subjectsData.sort((a, b) => {
+            let valueA, valueB;
+            if (sortBy === 'name') {
+                valueA = a.name.toLowerCase();
+                valueB = b.name.toLowerCase();
+            } else if (sortBy === 'time') {
+                valueA = a.time;
+                valueB = b.time;
+            } else {
+                return 0;
             }
+
+            if (valueA < valueB) return -1;
+            if (valueA > valueB) return 1;
+            return 0;
         });
 
-        // Xóa các hàng hiện tại và thêm các hàng đã sắp xếp
-        rows.forEach(row => subjectTableBody.appendChild(row));
+        renderSubjectsTable();
     }
 
-    function setupSortEventListeners() {
-        const nameHeader = document.querySelector(".category-table th:nth-child(2)");
-        const timeHeader = document.querySelector(".category-table th:nth-child(3)");
+    sortByNameButton.addEventListener('click', () => {
+        sortTable('name');
+    });
 
-        let nameAscending = true;
-        let timeAscending = true;
+    sortByTimeButton.addEventListener('click', () => {
+        sortTable('time');
+    });
 
-        nameHeader.addEventListener("click", () => {
-            sortTable(1, nameAscending);
-            nameAscending = !nameAscending;
-        });
+    filterSelect.addEventListener("change", () => {
+        const filterValue = filterSelect.value;
+        let filteredData = subjectsData;
+        if (filterValue) {
+            filteredData = subjectsData.filter(subject => subject.status === filterValue);
+        }
+        renderSubjectsTable(filteredData);
+    });
 
-        timeHeader.addEventListener("click", () => {
-            sortTable(2, timeAscending);
-            timeAscending = !timeAscending;
-        });
-    }
+    closeNotification.onclick = () => {
+        deleteSuccessNotification.style.display = 'none';
+    };
 
-    setupEventListeners();
-    setupSortEventListeners();
+    renderSubjectsTable();
 });
