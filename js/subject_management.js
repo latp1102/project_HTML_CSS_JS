@@ -259,7 +259,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePagination();
     };
 
-    // Hàm hiển thị thông báo thành công
     const showSuccessNotification = () => {
         const notification = document.createElement('div');
         notification.classList.add('success-notification');
@@ -273,17 +272,9 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         document.body.appendChild(notification);
 
-        // Đóng thông báo khi click vào icon đóng
         notification.querySelector('.close-notification').onclick = () => {
             document.body.removeChild(notification);
         };
-
-        // Đóng thông báo sau 3 giây
-        // setTimeout(() => {
-        //     if (document.body.contains(notification)) {
-        //         document.body.removeChild(notification);
-        //     }
-        // }, 3000);
     };
 
     buttonAddCategory.onclick = openForm;
