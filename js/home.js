@@ -5,7 +5,7 @@ searchInput.addEventListener("input", function () {
   const searchTerm = searchInput.value.toLowerCase();
 
   courses.forEach((course) => {
-    const subject = course.dataset.subject.toLowerCase();
+    const subject = course.subject.toLowerCase();
     if (subject.includes(searchTerm)) {
       course.style.display = "block";
     } else {

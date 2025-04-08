@@ -20,14 +20,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortByTimeButton = document.getElementById('sortByTime');
 
     let subjectsData = [
-        { id: 1, name: "Session 01-Tổng quan về HTML", time: 45, status: "active", subjectType: "HTML VÀ CSS" },
-        { id: 2, name: "Session 02-Thẻ inline và Block", time: 60, status: "inactive", subjectType: "HTML VÀ CSS" },
-        { id: 3, name: "Session 03-Form và Table", time: 40, status: "active", subjectType: "HTML VÀ CSS" },
-        { id: 4, name: "Session 04-CSS cơ bản", time: 45, status: "inactive", subjectType: "HTML VÀ CSS" },
-        { id: 5, name: "Session 05-CSS layout", time: 60, status: "inactive", subjectType: "HTML VÀ CSS" },
-        { id: 6, name: "Session 06-CSS Flex box", time: 45, status: "inactive", subjectType: "HTML VÀ CSS" },
-        { id: 7, name: "Session 12-Con trỏ trong C", time: 45, status: "active", subjectType: "Lập trình C cơ bản" },
-        { id: 8, name: "Session 15-Đọc và ghi file", time: 60, status: "inactive", subjectType: "Lập trình C cơ bản" },
+        { 
+            id: 1, 
+            name: "Session 01-Tổng quan về HTML", 
+            time: 45, status: "active", 
+            subjectType: "HTML VÀ CSS" 
+        },
+        { 
+            id: 2, 
+            name: "Session 02-Thẻ inline và Block", 
+            time: 60, status: "inactive", 
+            subjectType: "HTML VÀ CSS" 
+        },
+        { 
+            id: 3, 
+            name: "Session 03-Form và Table", 
+            time: 40, status: "active", 
+            subjectType: "HTML VÀ CSS" 
+        },
+        { 
+            id: 4, 
+            name: "Session 04-CSS cơ bản", 
+            time: 45, status: "inactive", 
+            subjectType: "HTML VÀ CSS" 
+        },
+        { 
+            id: 5, 
+            name: "Session 05-CSS layout", 
+            time: 60, 
+            status: "inactive", 
+            subjectType: "HTML VÀ CSS" 
+        },
+        { 
+            id: 6, 
+            name: "Session 06-CSS Flex box", 
+            time: 45, status: "inactive", 
+            subjectType: "HTML VÀ CSS" 
+        },
+        { 
+            id: 7, 
+            name: "Session 12-Con trỏ trong C", 
+            time: 45, status: "active", 
+            subjectType: "Lập trình C cơ bản" 
+        },
+        { 
+            id: 8, 
+            name: "Session 15-Đọc và ghi file", 
+            time: 60, 
+            status: "inactive", 
+            subjectType: "Lập trình C cơ bản" 
+        },
     ];
 
     function renderSubjectsTable(data = subjectsData) {

@@ -27,10 +27,11 @@ p {
   color: #84919A;
 }
 .menu a {
+  display: flex;
+  gap: 8px;
   padding: 10px 15px;
   text-decoration: none;
   color: #252C32;
-  border-bottom: 1px solid #E5E9EB;
 }
 
 .content {
@@ -354,4 +355,3 @@ p {
   margin-left: 16px;
   gap: 16px;
 }
-

@@ -35,6 +35,15 @@ body {
   flex-direction: column;
 }
 
+.menu a {
+  display: flex;
+  gap: 8px;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #252C32;
+  border-bottom: 1px solid #E5E9EB;
+}
+
 .content {
   flex: 1;
   margin-left: 24px;
@@ -206,12 +215,6 @@ body {
   justify-content: center;
 }
 
-.menu a {
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #E5E9EB;
-  border-bottom: 1px solid #E5E9EB;
-}
 
 .header-iconss .image_10 {
   display: flex;
