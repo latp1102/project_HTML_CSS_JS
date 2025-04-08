@@ -28,7 +28,6 @@ loginBtn.addEventListener('click', function() {
         if (userData && userData.email === emailInput.value && userData.password === passwordInput.value) {
             alert('Đăng nhập thành công!');
             window.location.href = 'home.html'; 
-            // window.location.href = 'dashboard.html'; 
         } else {
             alert('Email hoặc mật khẩu không đúng.');
         }
