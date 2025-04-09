@@ -26,10 +26,17 @@ loginBtn.addEventListener('click', function() {
         const userData = JSON.parse(localStorage.getItem('userData'));
 
         if (userData && userData.email === emailInput.value && userData.password === passwordInput.value) {
-            alert('Đăng nhập thành công!');
-            window.location.href = 'home.html'; 
+            Swal.fire({
+                text: "Đăng nhập thành công",
+                icon: "success"
+            }).then(()=> {
+                window.location.href = 'home.html'; 
+            });
         } else {
-            alert('Email hoặc mật khẩu không đúng.');
+            Swal.fire({
+                text: "Email hoặc mật khẩu không đúng",
+                icon: "error"
+            });
         }
     }
 });

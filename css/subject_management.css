@@ -130,11 +130,13 @@ p {
 .category-table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid #E5E9EB;
 }
 
 .category-table thead tr {
   height: 40px;
-  background-color: #EAECF0;
+  padding: 0 16px;
+  background-color: #F9FAFB;
   border: 1px solid #E5E9EB;
 }
 

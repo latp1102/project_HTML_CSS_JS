@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonNext = document.querySelector(".button-next");
     const selectFilter = document.querySelector(".select");
     const sortByNameAsc = document.getElementById("sortByNameAsc");
-
     let currentPage = 1;
     const rowsPerPage = 5;
     let subjects = [
@@ -246,11 +245,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const nameA = a.name.toUpperCase();
             const nameB = b.name.toUpperCase();
             if (order === 'asc') {
-                if (nameA < nameB) return -1;
-                if (nameA > nameB) return 1;
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
             } else {
-                if (nameA < nameB) return 1;
-                if (nameA > nameB) return -1;
+                if (nameA < nameB) {
+                    return 1;
+                }
+                if (nameA > nameB) {
+                    return -1;
+                }
             }
             return 0;
         });

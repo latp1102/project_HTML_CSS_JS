@@ -78,8 +78,7 @@ body {
 .button {
   height: 36px;
   padding: 0 16px;
-  border: 1px solid transparent;
-  outline: none;
+  border: 1px solid #E5E9EB;
   background-color: #4094F7;
   border-radius: 4px;
   color: #FFFFFF;
@@ -105,11 +104,11 @@ body {
   border: 1px solid transparent;
   outline: none;
   border-radius: 4px;
-  border: 1px solid E5E9EB;
+  border: 1px solid #E5E9EB;
   display: flex;
   flex: 0.5;
-  background-color: #4094F7;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #000000;
 }
 
 #buttonAddCategory {
@@ -126,19 +125,20 @@ body {
 .category-table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid #E5E9EB;
 }
 
 .category-table thead tr {
   height: 40px;
   padding: 0 16px;
   background-color: #F9FAFB;
-  border: 1px solid E5E9EB;
+  border: 1px solid #E5E9EB;
 }
 
 .category-table tbody tr td {
   height: 40px;
   padding: 0 16px;
-  border: 1px solid E5E9EB;
+  border: 1px solid #E5E9EB;
 }
 
 .status {
@@ -187,8 +187,7 @@ body {
   height: 32px;
 }
 
-.button-prev,
-.button-next {
+.button-prev, .button-next {
   display: flex;
   justify-content: center;
 }
@@ -408,12 +407,11 @@ hr {
 
 .modal-footer button.delete {
   background-color: #DC2626;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .modal-icon {
   color: #DC2626;
-  font-size: 2em;
   margin-bottom: 10px;
 }
 
@@ -462,7 +460,7 @@ hr {
   margin-bottom: 10px;
 }
 
-.sort-buttons .button {
+.sort-buttons .button-01 {
   height: 36px;
   padding: 0 16px;
   border: 1px solid transparent;
@@ -470,7 +468,6 @@ hr {
   background-color: #4094F7;
   border-radius: 4px;
   color: #FFFFFF;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s linear;
 }
