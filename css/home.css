@@ -222,3 +222,22 @@ footer {
   width: 16px; 
   height: 16px;
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+#userName {
+  margin-right: 10px;
+}
+
+#logoutBtn {
+  background-color: #DC2626;
+  color: #FFFFFF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
