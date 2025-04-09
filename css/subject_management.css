@@ -127,6 +127,16 @@ p {
   right: 10px;
 }
 
+#sortByNameAsc{
+  background-color: #4094F7;
+  width: 150px;
+  height: 40px;
+  border: 1px solid #E5E9EB;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+
+}
+
 .category-table {
   width: 100%;
   border-collapse: collapse;
@@ -267,13 +277,14 @@ p {
 }
 
 #btnCloseFormCategory {
-  background-color: gray;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #000000;
   border-radius: 8px;
+  border: 1px solid #E5E9EB;
 }
 
 #btnAddSubject {
-  background: blue;
+  background: #4094F7;
   color: #FFFFFF;
   border-radius: 10px;
 }

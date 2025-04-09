@@ -196,6 +196,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         closeForm();
         filterSubjects();
+        Swal.fire({
+            text: "Thêm môn học thành công",
+            icon: "success"
+        });
     };
 
     const filterSubjects = () => {
