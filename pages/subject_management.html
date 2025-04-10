@@ -109,13 +109,13 @@
             <div class="modal-body">
                 <form id="editForm">
                     <div class="form-group">
-                        <label for="editSubjectName">Tên môn học</label>
+                        <label class="editSubjectName" for="editSubjectName">Tên môn học</label>
                         <input type="text" id="editSubjectName" name="editSubjectName" required />
-                        <span id="editSubjectNameError" class="error-message" style="color: #DC2626; display: none;"></span>
+                        <p id="editSubjectNameError" class="error-message" style="color: #DC2626; display: none;"></p>
                     </div>
                     <div class="form-group">
                         <label>Trạng thái</label>
-                        <div>
+                        <div class="radio-Input">
                             <input class="radio" type="radio" id="editActive" name="editStatus" value="active" />
                             <label for="editActive">Đang hoạt động</label>
                             <input type="radio" id="editInactive" name="editStatus" value="inactive" />
@@ -123,9 +123,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="button-02" id="btnCancelEdit">Hủy</button>
-                        <button type="button" class="button" id="btnSaveSubject">Lưu</button>
-                    </div>
+                        <div class="form-group_input">
+                            <button type="button" class="button-02" id="btnCancelEdit">Hủy</button>
+                            <button type="button" class="button" id="btnSaveSubject">Lưu</button>
+                        </div>
+
+                        </div>
                 </form>
             </div>
         </div>

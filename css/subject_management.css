@@ -23,6 +23,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 p {
   color: #84919A;
 }
@@ -284,8 +285,8 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #FFFFFF;
   padding: 20px;
+  background-color: #FFFFFF;
   border: 1px solid #D0D5DD;
   z-index: 1000;
   text-align: center;
@@ -349,7 +350,7 @@ p {
   margin-bottom: 18px;
 }
 
-.success-notification img.close-notification {
+.success-notification  {
   border: 1px solid #FFFFFF59;
   background-color: #FFFFFF59;
   border-radius: 100px;
@@ -373,6 +374,8 @@ p {
   align-items: center;
 }
 
+
+
 .modal-content {
   background-color: #FEFEFE;
   margin: 15% auto;
@@ -382,15 +385,9 @@ p {
   border-radius: 8px;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #E5E9EB;
-  margin-bottom: 15px;
+h2 {
+  margin-top: 23px;
 }
-
 .close-button {
   color: #344054;
   float: right;
@@ -409,14 +406,11 @@ p {
   margin-bottom: 20px;
 }
 
+.form-group, .editSubjectNameError {
+  margin-top: 20px;
+}
 .form-group {
   margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
 }
 
 .form-group input[type="text"] {
@@ -424,7 +418,7 @@ p {
   padding: 8px;
   border: 1px solid #DADADA;
   border-radius: 4px;
-  box-sizing: border-box;
+  margin-top: 6px;
 }
 
 .modal-actions {
@@ -433,6 +427,12 @@ p {
   gap: 10px;
 }
 
+.radio-Input {
+  display: flex;
+  gap: 8px;
+  margin-left: 24px;
+  margin-top: 6px;
+}
 .modal-actions button.button {
   background-color: #4094F7;
   color: #FFFFFF;
@@ -440,7 +440,7 @@ p {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .modal-actions button.button:hover {
@@ -456,8 +456,19 @@ p {
 .button-02 {
   color: #000000;
   background-color: #FFFFFF;
-  width: 45px;
+  width: 50px;
   height: 35px;
   border-radius: 4px;
   border: 1px solid #E5E9EB;
+}
+
+.form-group_input {
+  display: flex;
+  flex-direction: row;
+  gap: 13px;
+  justify-content: end;
+}
+
+.error-message {
+  font-size: 12px;
 }

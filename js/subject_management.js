@@ -212,11 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.removeChild(notification);
         };
 
-        setTimeout(() => {
-            if (document.body.contains(notification)) {
-                document.body.removeChild(notification);
-            }
-        }, 3000);
     };
 
     const openEditModal = (row) => {
@@ -242,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (editingSubjectId !== null) {
             const updatedName = editSubjectNameInput.value.trim();
             const updatedStatus = document.querySelector('input[name="editStatus"]:checked').value;
-            const editSubjectNameError = document.getElementById("editSubjectNameError"); // Lấy tham chiếu đến phần tử hiển thị lỗi
+            const editSubjectNameError = document.getElementById("editSubjectNameError"); 
     
             if (updatedName) {
                 if (editSubjectNameError) {
@@ -258,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!editSubjectNameError) {
                     editSubjectNameError = document.createElement("p");
                     editSubjectNameError.id = "editSubjectNameError";
-                    editSubjectNameError.style.color = "#DC2626";
+                    // editSubjectNameError.style.color = "#DC2626";
                     const inputElement = document.getElementById("editSubjectName");
                     inputElement.parentNode.insertBefore(editSubjectNameError, inputElement.nextSibling);
                 }
