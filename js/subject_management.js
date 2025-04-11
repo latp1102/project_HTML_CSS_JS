@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCloseFormAddCategory = document.getElementById("btnCloseFormAddCategory");
     const btnAddSubject = document.getElementById("btnAddSubject");
     const subjectTableBody = document.querySelector(".category-table tbody");
+    const subjectNameAddInput = document.getElementById("subjectNameAdd");
     const subjectNameAddError = document.getElementById("subjectNameAddError");
     const searchInput = document.querySelector(".input-search");
     const pageNumbersContainer = document.querySelector(".page-numbers");
@@ -13,34 +14,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const editModal = document.getElementById("editModal");
     const editForm = document.getElementById("editForm");
     const editSubjectNameInput = document.getElementById("editSubjectName");
+    const editSubjectNameErrorEdit = document.getElementById("editSubjectNameError");
     const editActiveRadio = document.getElementById("editActive");
     const editInactiveRadio = document.getElementById("editInactive");
     const btnCloseEditModal = document.getElementById("btnCloseEditModal");
     const btnSaveSubject = document.getElementById("btnSaveSubject");
     const btnCancelEdit = document.getElementById("btnCancelEdit");
-
+    
+    let subjects = [];
     let currentPage = 1;
-    const rowsPerPage = 5;
-    let subjects = [
-        { id: 1, name: "Lập trình C", status: "active", createdAt: "2023-11-20T10:00:00Z" },
-        { id: 2, name: "Lập trình Frontend với ReactJS", status: "inactive", createdAt: "2023-11-19T14:30:00Z" },
-        { id: 3, name: "Lập trình Backend với Spring Boot", status: "active", createdAt: "2023-11-21T09:15:00Z" },
-        { id: 4, name: "Lập trình Frontend với VueJS", status: "inactive", createdAt: "2023-11-18T16:45:00Z" },
-        { id: 5, name: "Cấu trúc dữ liệu và giải thuật", status: "inactive", createdAt: "2023-11-22T11:20:00Z" },
-        { id: 6, name: "Phân tích và thiết kế hệ thống", status: "inactive", createdAt: "2023-11-17T13:00:00Z" },
-        { id: 7, name: "Toán cao cấp", status: "active", createdAt: "2023-11-23T15:30:00Z" },
-        { id: 8, name: "Tiếng Anh chuyên ngành", status: "inactive", createdAt: "2023-11-16T10:45:00Z" },
-    ];
+    const rowsPerPage = 5; 
+    const storedSubjects = localStorage.getItem('subjects');
+
+    if (storedSubjects) {
+        subjects = JSON.parse(storedSubjects);
+    } else {
+        subjects = [
+            { id: 1, name: "Lập trình C", status: "active", createdAt: "2023-11-20T10:00:00Z" },
+            { id: 2, name: "Lập trình Frontend với ReactJS", status: "inactive", createdAt: "2023-11-19T14:30:00Z" },
+            { id: 3, name: "Lập trình Backend với Spring Boot", status: "active", createdAt: "2023-11-21T09:15:00Z" },
+            { id: 4, name: "Lập trình Frontend với VueJS", status: "inactive", createdAt: "2023-11-18T16:45:00Z" },
+            { id: 5, name: "Cấu trúc dữ liệu và giải thuật", status: "inactive", createdAt: "2023-11-22T11:20:00Z" },
+            { id: 6, name: "Phân tích và thiết kế hệ thống", status: "inactive", createdAt: "2023-11-17T13:00:00Z" },
+            { id: 7, name: "Toán cao cấp", status: "active", createdAt: "2023-11-23T15:30:00Z" },
+            { id: 8, name: "Tiếng Anh chuyên ngành", status: "inactive", createdAt: "2023-11-16T10:45:00Z" },
+        ];
+        localStorage.setItem('subjects', JSON.stringify(subjects)); 
+    }
+
     let filteredSubjects = [...subjects];
     let editingSubjectId = null;
-    let sortDirection = 'asc'; // 'asc' cho a-z, 'desc' cho z-a
+    let sortDirection = 'asc';
 
     const renderTable = () => {
-        if (!subjectTableBody) return;
+        if (!subjectTableBody) {
+            console.error("Không tìm thấy phần tử tbody của bảng.");
+            return;
+        }
         subjectTableBody.innerHTML = "";
         const start = (currentPage - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        const visibleSubjects = filteredSubjects.filter((subject, index) => index >= start && index < end);
+        const visibleSubjects = filteredSubjects.slice(start, end); 
+
+        console.log("currentPage:", currentPage);
+        console.log("rowsPerPage:", rowsPerPage);
+        console.log("start:", start);
+        console.log("end:", end);
+        console.log("filteredSubjects:", filteredSubjects);
+        console.log("visibleSubjects:", visibleSubjects);
 
         visibleSubjects.forEach((subject) => {
             const newRow = createSubjectRow(subject);
@@ -112,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             filterSubjects();
             document.body.removeChild(modal);
             showSuccessNotification("Xóa môn học thành công");
+            localStorage.setItem('subjects', JSON.stringify(subjects)); 
         };
         modal.appendChild(confirmButton);
 
@@ -133,20 +155,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             return subject;
         });
+        localStorage.setItem('subjects', JSON.stringify(subjects)); 
     };
 
     const addSubject = () => {
-        const subjectName = document.getElementById("subjectNameAdd").value.trim();
+        const subjectName = subjectNameAddInput.value.trim();
         const status = document.querySelector('input[name="statusAdd"]:checked').value;
+
         if (!subjectName) {
             subjectNameAddError.textContent = "Tên môn học không được để trống";
+            subjectNameAddError.style.display = "block";
+            return;
+        } else if (subjects.some(sub => sub.name.toLowerCase() === subjectName.toLowerCase())) {
+            subjectNameAddError.textContent = "Tên môn học đã tồn tại";
             subjectNameAddError.style.display = "block";
             return;
         } else {
             subjectNameAddError.style.display = "none";
         }
+
         const newId = subjects.length > 0 ? Math.max(...subjects.map(sub => sub.id)) + 1 : 1;
-        subjects.push({ id: newId, name: subjectName, status, createdAt: new Date().toISOString() });
+        const newSubject = { id: newId, name: subjectName, status, createdAt: new Date().toISOString() };
+        subjects.push(newSubject);
+        localStorage.setItem('subjects', JSON.stringify(subjects)); 
+
         closeAddForm();
         filterSubjects();
         showSuccessNotification("Thêm môn học thành công");
@@ -187,7 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const openAddForm = () => {
         formAddCategory.style.display = "flex";
-        document.getElementById("subjectNameAdd").value = "";
+        subjectNameAddInput.value = "";
+        subjectNameAddError.style.display = "none";
         document.querySelector('input[name="statusAdd"][value="active"]').checked = true;
     };
 
@@ -211,7 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
         notification.querySelector('.close-notification').onclick = () => {
             document.body.removeChild(notification);
         };
-
     };
 
     const openEditModal = (row) => {
@@ -219,6 +251,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const subjectToEdit = subjects.find(subject => subject.id === editingSubjectId);
         if (subjectToEdit) {
             editSubjectNameInput.value = subjectToEdit.name;
+            if (editSubjectNameErrorEdit) {
+                editSubjectNameErrorEdit.style.display = "none";
+                editSubjectNameErrorEdit.textContent = "";
+            }
             if (subjectToEdit.status === "active") {
                 editActiveRadio.checked = true;
             } else {
@@ -231,35 +267,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeEditModal = () => {
         editModal.style.display = "none";
         editingSubjectId = null;
+        if (editSubjectNameErrorEdit) {
+            editSubjectNameErrorEdit.style.display = "none";
+            editSubjectNameErrorEdit.textContent = "";
+        }
     };
 
     const saveSubject = () => {
         if (editingSubjectId !== null) {
             const updatedName = editSubjectNameInput.value.trim();
             const updatedStatus = document.querySelector('input[name="editStatus"]:checked').value;
-            const editSubjectNameError = document.getElementById("editSubjectNameError"); 
-    
-            if (updatedName) {
-                if (editSubjectNameError) {
-                    editSubjectNameError.style.display = "none";
-                    editSubjectNameError.textContent = "";
+
+            if (!updatedName) {
+                if (!editSubjectNameErrorEdit) {
+                    const errorElement = document.createElement("p");
+                    errorElement.id = "editSubjectNameError";
+                    errorElement.className = "error-message";
+                    errorElement.style.color = "#DC2626";
+                    editSubjectNameInput.parentNode.insertBefore(errorElement, editSubjectNameInput.nextSibling);
+                    editSubjectNameErrorEdit = errorElement;
                 }
-                updateSubject(editingSubjectId, updatedName, updatedStatus);
-                filterSubjects();
-                closeEditModal();
-                showSuccessNotification("Cập nhật môn học thành công");
-                editingSubjectId = null;
+                editSubjectNameErrorEdit.textContent = "Tên môn học không được để trống";
+                editSubjectNameErrorEdit.style.display = "block";
+                return;
+            } else if (subjects.some(sub => sub.id !== editingSubjectId && sub.name.toLowerCase() === updatedName.toLowerCase())) {
+                if (!editSubjectNameErrorEdit) {
+                    const errorElement = document.createElement("p");
+                    errorElement.id = "editSubjectNameError";
+                    errorElement.className = "error-message";
+                    errorElement.style.color = "#DC2626";
+                    editSubjectNameInput.parentNode.insertBefore(errorElement, editSubjectNameInput.nextSibling);
+                    editSubjectNameErrorEdit = errorElement;
+                }
+                editSubjectNameErrorEdit.textContent = "Tên môn học đã tồn tại";
+                editSubjectNameErrorEdit.style.display = "block";
+                return;
             } else {
-                if (!editSubjectNameError) {
-                    editSubjectNameError = document.createElement("p");
-                    editSubjectNameError.id = "editSubjectNameError";
-                    // editSubjectNameError.style.color = "#DC2626";
-                    const inputElement = document.getElementById("editSubjectName");
-                    inputElement.parentNode.insertBefore(editSubjectNameError, inputElement.nextSibling);
+                if (editSubjectNameErrorEdit) {
+                    editSubjectNameErrorEdit.style.display = "none";
+                    editSubjectNameErrorEdit.textContent = "";
                 }
-                editSubjectNameError.textContent = "Tên môn học không được để trống";
-                editSubjectNameError.style.display = "block";
             }
+
+            updateSubject(editingSubjectId, updatedName, updatedStatus);
+            filterSubjects();
+            closeEditModal();
+            showSuccessNotification("Cập nhật môn học thành công");
+            editingSubjectId = null;
+            localStorage.setItem('subjects', JSON.stringify(subjects)); 
         }
     };
 
@@ -279,9 +334,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     return 0;
                 }
             });
-            sortDirection = sortDirection === 'asc' ? 'desc' : 'asc'; 
+            sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
             renderTable();
-            updatePagination(); 
+            updatePagination();
         });
     }
 
@@ -303,6 +358,6 @@ document.addEventListener("DOMContentLoaded", () => {
         btnCancelEdit.onclick = closeEditModal;
     }
 
-    renderTable();
+    renderTable(); 
     updatePagination();
 });

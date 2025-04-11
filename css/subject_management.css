@@ -261,6 +261,9 @@ p {
 }
 
 .form-footer button {
+  border-radius: 10px;
+  width: 86px;
+  height: 44px;
   padding: 8px 15px;
   border: none;
   cursor: pointer;
@@ -352,12 +355,17 @@ p {
 
 .success-notification  {
   border: 1px solid #FFFFFF59;
-  background-color: #FFFFFF59;
-  border-radius: 100px;
+  background-color: #333E5A;
+  border-radius: 16px;
   padding: 4px;
   display: flex;
   margin-left: 16px;
   gap: 16px;
+}
+
+.success-notification img {
+  background-color: #84919A;
+  border-radius: 100px;
 }
 
 .modal {
@@ -373,8 +381,6 @@ p {
   justify-content: center;
   align-items: center;
 }
-
-
 
 .modal-content {
   background-color: #FEFEFE;
