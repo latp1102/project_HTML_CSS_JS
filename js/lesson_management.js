@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const closeNotification = document.getElementById("closeNotification");
 
+  let editingSubjectId = null;
+
   let subjectsData = [
     {
       id: 1,
@@ -87,18 +89,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const newRow = document.createElement("tr");
       newRow.setAttribute("data-id", subject.id);
       newRow.innerHTML = `
-            <td><input type="checkbox"></td>
-            <td>${subject.subjectType}</td>
-            <td>${subject.name}</td>
-            <td>${subject.time}</td>
-            <td>${
-              subject.status === "active"
-                ? `<div class="status status-active"><img src="../assets/public/icons/icon_19.png" alt=""><span>Đã hoàn thành</span></div>`
-                : `<div class="status status-inactive"><img src="../assets/public/icons/icon_20.png" alt=""><span>Chưa hoàn thành</span></div>`
-            }</td>
-            <td><img class="delete-button" src="../assets/public/icons/icon_14.png" alt=""></td>
-            <td><img class="edit-button" src="../assets/public/icons/icon_15.png" alt=""></td>
-        `;
+              <td><input type="checkbox"></td>
+              <td>${subject.subjectType}</td>
+              <td>${subject.name}</td>
+              <td>${subject.time}</td>
+              <td>${
+                subject.status === "active"
+                  ? `<div class="status status-active"><img src="../assets/public/icons/icon_19.png" alt=""><span>Đã hoàn thành</span></div>`
+                  : `<div class="status status-inactive"><img src="../assets/public/icons/icon_20.png" alt=""><span>Chưa hoàn thành</span></div>`
+              }</td>
+              <td><img class="delete-button" src="../assets/public/icons/icon_14.png" alt=""></td>
+              <td><img class="edit-button" src="../assets/public/icons/icon_15.png" alt=""></td>
+          `;
       subjectTableBody.appendChild(newRow);
     });
     setupEventListeners();
@@ -114,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timeInput.value = "";
     subjectNameError.textContent = "";
     timeError.textContent = "";
-    formCategory.dataset.editingRow = null;
+    editingSubjectId = null;
   });
 
   btnCloseFormCategory.addEventListener("click", closeForm);
@@ -139,19 +141,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!timeInput.value) {
-        timeError.textContent = "Thời gian học không được để trống";
-        return;
+      timeError.textContent = "Thời gian học không được để trống";
+      return;
     }
 
     if (isNaN(time) || time <= 0) {
-        timeError.textContent = "Thời gian học phải là số lớn hơn 0";
-        return;
+      timeError.textContent = "Thời gian học phải là số lớn hơn 0";
+      return;
     }
 
-    if (formCategory.dataset.editingRow) {
-      const editingId = parseInt(formCategory.dataset.editingRow, 10);
+    if (editingSubjectId) {
       const subjectIndex = subjectsData.findIndex(
-        (subject) => subject.id === editingId
+        (subject) => subject.id === editingSubjectId
       );
       if (subjectIndex !== -1) {
         subjectsData[subjectIndex].name = subjectName;
@@ -159,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         subjectsData[subjectIndex].status = status;
         subjectsData[subjectIndex].subjectType = subjectType;
       }
-      formCategory.dataset.editingRow = null;
+      editingSubjectId = null;
     } else {
       const newId = Date.now();
       subjectsData.push({
@@ -199,29 +200,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
     });
-
-    subjectTableBody.querySelectorAll(".edit-button").forEach((button) => {
-      button.onclick = () => {
-        const row = button.closest("tr");
-        const subjectId = parseInt(row.getAttribute("data-id"), 10);
-        const subject = subjectsData.find(
-          (subject) => subject.id === subjectId
-        );
-        if (subject) {
-          subjectNameInput.value = subject.name;
-          timeInput.value = subject.time;
-          document.querySelector(
-            `input[name="status"][value="${subject.status}"]`
-          ).checked = true;
-          subjectsSelect.value = subject.subjectType;
-          subjectNameError.textContent = "";
-          timeError.textContent = "";
-
-          formCategory.style.display = "flex";
-          formCategory.dataset.editingRow = subjectId;
-        }
-      };
-    });
   }
 
   filterSelect.addEventListener("change", () => {
@@ -232,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (subject) => subject.status === filterValue
       );
     } else {
-      filteredData = [...subjectsData]; 
+      filteredData = [...subjectsData];
     }
     renderSubjectsTable(filteredData);
   });
