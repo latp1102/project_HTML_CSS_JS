@@ -334,12 +334,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 const nameA = a.name.toLowerCase();
                 const nameB = b.name.toLowerCase();
                 if (sortDirection === 'asc') {
-                    if (nameA < nameB) return -1;
-                    if (nameA > nameB) return 1;
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
                     return 0;
                 } else {
-                    if (nameA > nameB) return -1;
-                    if (nameA < nameB) return 1;
+                    if (nameA > nameB) {
+                        return -1;
+                    }
+                    if (nameA < nameB) {
+                        return 1;
+                    }
                     return 0;
                 }
             });
