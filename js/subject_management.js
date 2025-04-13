@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCloseEditModal = document.getElementById("btnCloseEditModal");
     const btnSaveSubject = document.getElementById("btnSaveSubject");
     const btnCancelEdit = document.getElementById("btnCancelEdit");
-    
+
     let subjects = [];
     let currentPage = 1;
-    const rowsPerPage = 5; 
+    const rowsPerPage = 5;
     const storedSubjects = localStorage.getItem('subjects');
 
     if (storedSubjects) {
@@ -39,12 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
             { id: 7, name: "Toán cao cấp", status: "active", createdAt: "2023-11-23T15:30:00Z" },
             { id: 8, name: "Tiếng Anh chuyên ngành", status: "inactive", createdAt: "2023-11-16T10:45:00Z" },
         ];
-        localStorage.setItem('subjects', JSON.stringify(subjects)); 
+        localStorage.setItem('subjects', JSON.stringify(subjects));
     }
 
     let filteredSubjects = [...subjects];
     let editingSubjectId = null;
     let sortDirection = 'asc';
+
+    const formatDate = (isoString) => {
+        const date = new Date(isoString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${day}/${month}/${year}`;
+    };
 
     const renderTable = () => {
         if (!subjectTableBody) {
@@ -54,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         subjectTableBody.innerHTML = "";
         const start = (currentPage - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        const visibleSubjects = filteredSubjects.slice(start, end); 
+        const visibleSubjects = filteredSubjects.slice(start, end);
 
         console.log("currentPage:", currentPage);
         console.log("rowsPerPage:", rowsPerPage);
@@ -76,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${subject.id}</td>
             <td>${subject.name}</td>
             <td>${getStatusCellHtml(subject.status)}</td>
+            <td>${formatDate(subject.createdAt)}</td>
             <td class="all">
                 <img class="delete-button" src="../assets/public/icons/icon_14.png" alt="">
                 <img class="edit-button" src="../assets/public/icons/icon_15.png" alt="">
@@ -133,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             filterSubjects();
             document.body.removeChild(modal);
             showSuccessNotification("Xóa môn học thành công");
-            localStorage.setItem('subjects', JSON.stringify(subjects)); 
+            localStorage.setItem('subjects', JSON.stringify(subjects));
         };
         modal.appendChild(confirmButton);
 
@@ -155,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             return subject;
         });
-        localStorage.setItem('subjects', JSON.stringify(subjects)); 
+        localStorage.setItem('subjects', JSON.stringify(subjects));
     };
 
     const addSubject = () => {
@@ -177,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const newId = subjects.length > 0 ? Math.max(...subjects.map(sub => sub.id)) + 1 : 1;
         const newSubject = { id: newId, name: subjectName, status, createdAt: new Date().toISOString() };
         subjects.push(newSubject);
-        localStorage.setItem('subjects', JSON.stringify(subjects)); 
+        localStorage.setItem('subjects', JSON.stringify(subjects));
 
         closeAddForm();
         filterSubjects();
@@ -314,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
             closeEditModal();
             showSuccessNotification("Cập nhật môn học thành công");
             editingSubjectId = null;
-            localStorage.setItem('subjects', JSON.stringify(subjects)); 
+            localStorage.setItem('subjects', JSON.stringify(subjects));
         }
     };
 
@@ -358,6 +367,6 @@ document.addEventListener("DOMContentLoaded", () => {
         btnCancelEdit.onclick = closeEditModal;
     }
 
-    renderTable(); 
+    renderTable();
     updatePagination();
 });
