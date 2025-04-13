@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const sortableNameHeader = document.querySelector(".category-table th.sortable[data-sort='name']");
+    const sortableNameHeader = document.querySelector(".category-table, .status");
     if (sortableNameHeader) {
         sortableNameHeader.addEventListener('click', () => {
             filteredSubjects.sort((a, b) => {
