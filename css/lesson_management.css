@@ -24,10 +24,19 @@ body {
   border: 2px solid #E5E9EB;
 }
 
+.images-Input {
+  margin-left: 16px;
+}
+
 .menu-Inputs {
   margin-top: 16px;
   display: flex;
   flex-direction: column;
+}
+
+.menu p {
+  margin-left: 16px;
+  color: #84919A;
 }
 
 .menu a {

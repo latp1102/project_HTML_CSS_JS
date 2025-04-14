@@ -25,7 +25,12 @@ body {
 }
 
 p {
+  margin-left: 16px;
   color: #84919A;
+}
+
+.images-Input {
+  margin-left: 16px;
 }
 .menu a {
   display: flex;
