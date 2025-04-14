@@ -10,15 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const timeError = document.getElementById("timeError");
   const subjectsSelect = document.getElementById("subjects");
   const filterSelect = document.querySelector(".select");
-  const deleteConfirmationModal = document.getElementById(
-    "deleteConfirmationModal"
-  );
+  const deleteConfirmationModal = document.getElementById("deleteConfirmationModal");
   const subjectToDeleteName = document.getElementById("subjectToDeleteName");
   const cancelDelete = document.getElementById("cancelDelete");
   const confirmDelete = document.getElementById("confirmDelete");
-  const deleteSuccessNotification = document.getElementById(
-    "deleteSuccessNotification"
-  );
+  const deleteSuccessNotification = document.getElementById("deleteSuccessNotification");
   const closeNotification = document.getElementById("closeNotification");
 
   let editingSubjectId = null;
@@ -82,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
+  // hàm hiển thị bài học trong bảng
   function renderSubjectsTable(filterData) {
     subjectTableBody.innerHTML = "";
     const dataToRender = filterData || subjectsData;
@@ -121,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnCloseFormCategory.addEventListener("click", closeForm);
 
+  // hàm thêm mới
   btnAddSubject.addEventListener("click", () => {
     const subjectName = subjectNameInput.value.trim();
     const status = document.querySelector('input[name="status"]:checked').value;
@@ -175,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     closeForm();
   });
 
+  // hàm thiết lập cho các nút
   function setupEventListeners() {
     subjectTableBody.querySelectorAll(".delete-button").forEach((button) => {
       button.onclick = () => {
@@ -202,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // trạng thái lọc thay đổi
   filterSelect.addEventListener("change", () => {
     const filterValue = filterSelect.value;
     let filteredData;

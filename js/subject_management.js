@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let editingSubjectId = null;
     let sortDirection = 'asc';
 
+    // hiện thị ngày giờ
     const formatDate = (isoString) => {
         const date = new Date(isoString);
         const year = date.getFullYear();
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${day}/${month}/${year}`;
     };
 
+    // hiển thị dữ liệu môn học trong bảng
     const renderTable = () => {
         if (!subjectTableBody) {
             console.error("Không tìm thấy phần tử tbody của bảng.");
@@ -78,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setupEventListeners();
     };
 
+    // hàm để tạo bảng cho html 
     const createSubjectRow = (subject) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
@@ -93,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return newRow;
     };
 
+    // tạo ô trạng thái cho html
     const getStatusCellHtml = (status) => {
         const isActive = status === "active";
         return `
@@ -103,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     };
 
+    // hàm để thiết lập các nút xóa sửa cho html
     const setupEventListeners = () => {
         if (!subjectTableBody) return;
         subjectTableBody.querySelectorAll(".delete-button").forEach(button => {
@@ -113,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // hàm xóa
     const deleteSubject = (row) => {
         const modal = document.createElement('div');
         modal.classList.add('modal-overlay');
@@ -157,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(modal);
     };
 
+    // hàm cập nhật môn học trong mảng
     const updateSubject = (id, name, status) => {
         subjects = subjects.map(subject => {
             if (subject.id === id) {
@@ -167,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('subjects', JSON.stringify(subjects));
     };
 
+    // hàm thêm
     const addSubject = () => {
         const subjectName = subjectNameAddInput.value.trim();
         const status = document.querySelector('input[name="statusAdd"]:checked').value;
@@ -193,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showSuccessNotification("Thêm môn học thành công");
     };
 
+    // hàm tìm kiếm
     const filterSubjects = () => {
         const searchTerm = searchInput.value.trim().toLowerCase();
         const filterStatus = selectFilter.value;
@@ -207,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePagination();
     };
 
+    // cập nhật lại nút phân trang
     const updatePagination = () => {
         const totalPages = Math.ceil(filteredSubjects.length / rowsPerPage);
         pageNumbersContainer.innerHTML = "";
@@ -226,6 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
         buttonNext.disabled = currentPage === totalPages;
     };
 
+    // hàm hiển thị form mới
     const openAddForm = () => {
         formAddCategory.style.display = "flex";
         subjectNameAddInput.value = "";
@@ -233,10 +244,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('input[name="statusAdd"][value="active"]').checked = true;
     };
 
+    // ẩn form thêm mới
     const closeAddForm = () => {
         formAddCategory.style.display = "none";
     };
 
+    // hàm thông báo
     const showSuccessNotification = (message) => {
         const notification = document.createElement('div');
         notification.classList.add('success-notification');
@@ -255,6 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
+    // hàm hiển thị môn học và dữ liệu khi nhập
     const openEditModal = (row) => {
         editingSubjectId = parseInt(row.children[0].textContent);
         const subjectToEdit = subjects.find(subject => subject.id === editingSubjectId);
@@ -273,6 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // hàm ẩn modal sửa môn học
     const closeEditModal = () => {
         editModal.style.display = "none";
         editingSubjectId = null;
@@ -282,6 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // hàm để lưu và khi thay đổi
     const saveSubject = () => {
         if (editingSubjectId !== null) {
             const updatedName = editSubjectNameInput.value.trim();
@@ -327,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // hàm sắp xếp
     const sortableNameHeader = document.querySelector(".category-table, .name");
     if (sortableNameHeader) {
         sortableNameHeader.addEventListener('click', () => {
@@ -368,7 +385,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentPage > 1) currentPage--; renderTable(); updatePagination();
     };
     buttonNext.onclick = () => {
-        if (currentPage < Math.ceil(filteredSubjects.length / rowsPerPage)) currentPage++; renderTable(); updatePagination();
+        if (currentPage < Math.ceil(filteredSubjects.length / rowsPerPage)) {
+            currentPage++;
+        } 
+        renderTable(); 
+        updatePagination();
     };
 
     if (btnCancelEdit) {
